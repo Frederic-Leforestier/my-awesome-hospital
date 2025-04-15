@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/style/output.css">
+    <title>My awesome Hospital</title>
+</head>
+<body>
+    <header>
+        <img src="/assets/img/logo.png" alt="logo Hospital">
+        <nav>
+            <a href="/pages/departement/list_departement.html">Departements</a>
+            <a href="/pages/doctor/list_doctor.html">Doctors</a>
+            <a href="/pages/patient/list_patient.html">Patients</a> 
+        </nav>
+    </header>
+    
+    <h1>Gestion des Patients</h1>
+    
+    <h2>Formulaire Patients</h2>
+    
+    <form id="formPatient">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName">
+        <br>
+        
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName">
+        <br>
+        
+        <label for="numSecu">Numéro de Sécurité Sociale:</label>
+        <input type="text" id="numSecu" name="numSecu">
+        <br>
+        
+        <label for="birthdate">Birthdate:</label>
+        <input type="date" id="birthdate" name="birthdate">
+        <br>
+        
+        <label for="mail">Email:</label>
+        <input type="text" id="mail" name="mail">
+        <br>
+        
+        <label for="tel">Téléphone:</label>
+        <input type="text" id="tel" name="tel">
+        <br>
+        
+        <input type="submit" value="Submit" id="btnSubmit">
+    </form>
+
+    <p id="error-message" style="color: red;"></p>
+
+
+    <h2>Liste des Patients</h2>
+    
+    <script src="/js/class/patient.js"></script>
+
+
+</body>
+</html>
