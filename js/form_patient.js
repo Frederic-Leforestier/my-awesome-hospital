@@ -21,25 +21,21 @@ document.getElementById("formPatient").addEventListener('submit', function(event
         }
         
         let existeDeja = false;
+        
         for (let i = 0; i < listpatients.length; i++) {
             if  (listpatients[i].secuNumber === newPatient.secuNumber) {
-                existeDeja = true;
-                
+                existeDeja = true;  
             }
         }
         if(existeDeja === true){
             alert("erreur, le numéro de séucité est déja inscrit dans la bdd")
             return;
         }
-        
-        
-        
+
         listpatients.push(newPatient);
         
         localStorage.setItem("patients", JSON.stringify(listpatients));
-        
-        
-        
+         
         addPatientToList(newPatient);  // Ajouter à la liste des patients
         alert("Le patient a été ajouté avec succès !");
         document.getElementById("formPatient").reset(); // Réinitialise le formulaire
@@ -101,7 +97,6 @@ function validatePatientForm() {
         errorMessage += "Le prénom est invalide. N'utilisez que des lettres, espaces ou tirets.\n";
     }
     
-    
     let regexLastName = /^[A-ZÀ-ÖØ-Ý]+([ -][A-ZÀ-ÖØ-Ý]+)*$/;
     if (lastName === "" || !regexLastName.test(lastName)) {
         errorMessage += "Le nom est obligatoire et doit être en MAJUSCULE.\n";
@@ -135,7 +130,9 @@ function validatePatientForm() {
         document.getElementById("error-message").textContent = errorMessage;
         document.getElementById("error-message").style.display = "block";
         return false;
+
     } else {
+        
         document.getElementById("error-message").style.display = "none";
     }
     
