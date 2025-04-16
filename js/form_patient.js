@@ -1,6 +1,5 @@
 document.getElementById("formPatient").addEventListener('submit', function(event) {
     event.preventDefault(); // Empêche la soumission du formulaire pour éviter le rechargement de la page
-    // window.unload
     
     if (validatePatientForm()) {
         // Création d'un nouveau patient avec les données du formulaire
@@ -59,15 +58,6 @@ function addPatientToList(patient) {
     
     const birthDayP = document.createElement("p");
     birthDayP.appendChild(document.createTextNode("Date de naissance : " + patient.birthDay));
-    
-    const secuNumberP = document.createElement("p");
-    secuNumberP.appendChild(document.createTextNode("Numéro de sécu : " + patient.secuNumber));
-    
-    const mailP = document.createElement("p");
-    mailP.appendChild(document.createTextNode("Email : " + patient.mail));
-    
-    const phoneP = document.createElement("p");
-    phoneP.appendChild(document.createTextNode("Téléphone : " + patient.phone));
     
     const modifyLink = document.createElement("a");
     modifyLink.textContent = "Modifiez";
@@ -147,6 +137,6 @@ window.onload = function () {
         }
     }
 
-    console.log("Tout est chargé !");
+    // console.log("Tout est chargé !");
 };
 
