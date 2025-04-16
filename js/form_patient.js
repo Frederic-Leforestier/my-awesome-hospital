@@ -31,9 +31,9 @@ document.getElementById("formPatient").addEventListener('submit', function(event
             alert("erreur, le numéro de séucité est déja inscrit dans la bdd")
             return;
         }
-
-
-
+        
+        
+        
         listpatients.push(newPatient);
         
         localStorage.setItem("patients", JSON.stringify(listpatients));
@@ -72,7 +72,7 @@ function addPatientToList(patient) {
     const modifyLink = document.createElement("a");
     modifyLink.textContent = "Modifiez";
     modifyLink.href = `modif_patient.html?numSecu=${patient.secuNumber}`;
-
+    
     // Ajout des paragraphes au div principal
     listSection.appendChild(nameP);
     listSection.appendChild(firstNameP);
@@ -96,11 +96,13 @@ function validatePatientForm() {
     
     let errorMessage = ""; // Variable pour stocker les erreurs
     
-    if (firstName === "") {
-        errorMessage += "Le prénom est obligatoire.\n";
+    let regexFirstName = /^[A-Za-zÀ-ÖØ-öø-ÿ]+([ '-][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/;
+    if (!regexFirstName.test(firstName)) {
+        errorMessage += "Le prénom est invalide. N'utilisez que des lettres, espaces ou tirets.\n";
     }
     
-    let regexLastName = /^[A-Z]+([- ][A-Z]+)*$/;
+    
+    let regexLastName = /^[A-ZÀ-ÖØ-Ý]+([ -][A-ZÀ-ÖØ-Ý]+)*$/;
     if (lastName === "" || !regexLastName.test(lastName)) {
         errorMessage += "Le nom est obligatoire et doit être en MAJUSCULE.\n";
     }
@@ -110,7 +112,7 @@ function validatePatientForm() {
         errorMessage += "Le numéro de sécurité sociale est obligatoire et doit être composé de 13 chiffres.\n";
     }
     
-    let regexMail = /^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$/;
+    let regexMail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (mail === "" || !regexMail.test(mail)) {
         errorMessage += "L'email est obligatoire et doit être valide.\n";
     }
@@ -142,25 +144,25 @@ function validatePatientForm() {
 
 window.onload = function () {
     let patientSaved = JSON.parse(localStorage.getItem("patients"));
-
+    
     if (patientSaved !== null) {
         const patientList = document.getElementById("patientList");
-
+        
         for (let i = 0; i < patientSaved.length; i++) {
             const patient = patientSaved[i];
-
+            
             const patientInfo = document.createElement("p");
             patientInfo.textContent = `Prénom : ${patient.firstName}, Nom : ${patient.lastName}, Date de naissance : ${patient.birthDay}`;
-
+            
             const modifyLink  = document.createElement("a");
             modifyLink .textContent = "Modifiez";
-
+            
             modifyLink.href = `modif_patient.html?numSecu=${patient.secuNumber}`;                      
-
+            
             patientList.appendChild(patientInfo);
             patientList.appendChild(modifyLink)
         }
     }
-
+    
     console.log("Tout est chargé !");
 };
