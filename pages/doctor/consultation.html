@@ -12,26 +12,39 @@
         <img src="/assets/img/logo.png" alt="logo Hospital">
         <nav>
             <a href="#">Departements</a>
-            <a href="#">Doctors</a>
+            <a href="list_doctor.html">Doctors</a>
             <a href="#">Patients</a>
         </nav>
     </header>
-    <main>
-        <form >
-          <label for="date">Date :</label><br>
-          <input type="text" id="date"  required><br><br>
-          
-          <label for="doctor">Doctor :</label><br>
-          <input type="text" id="doctor" required><br><br>
-          
-          <label for="patient">Patient :</label><br>
-          <input type="text" id="patient" required><br><br>
-          
-          <label for="raeson">Raison :</label><br>
-          <input  id="raeson"  required><br><br>
-        
-          <input type="submit" value="Envoyer">
-        </form>
+    <main id="doctorDetails">
+
     </main>
+    <section id="appointementDoctor">
+        <form id="formApp">
+            <label for="date">Date :</label><br>
+            <input type="date" id="date"><br>
+            
+            <label for="time">Heure :</label><br>
+            <input type="time" id="time"><br>
+
+            <label for="doctor">Doctor :</label><br>
+            <input type="text" id="doctor"><br>
+            
+            <label for="patient">Patient :</label><br>
+            <input type="text" id="patient"><br>
+            
+            <label for="raeson">Raison :</label><br>
+            <input  id="raeson"><br>
+          
+            <input type="submit" value="Envoyer">
+          </form>
+    </section>
+
+    <script src="../../js/class/Appointement.js"></script>
+    <script src="../../js/class/departement.js"></script>
+    <script src="../../js/class/patient.js"></script>
+    <script src="../../js/class/doctor.js"></script>
+    <script src="../../js/storage.js"></script>
+    <script src="../../js/detailDoc.js"></script>
 </body>
 </html>
