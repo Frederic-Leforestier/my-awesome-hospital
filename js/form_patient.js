@@ -77,9 +77,6 @@ function addPatientToList(patient) {
     listSection.appendChild(nameP);
     listSection.appendChild(firstNameP);
     listSection.appendChild(birthDayP);
-    listSection.appendChild(secuNumberP);
-    listSection.appendChild(mailP);
-    listSection.appendChild(phoneP);
     listSection.appendChild(modifyLink);
     
     // Ajouter la nouvelle section à la liste des patients
@@ -145,23 +142,11 @@ window.onload = function () {
     let patientSaved = JSON.parse(localStorage.getItem("patients"));
 
     if (patientSaved !== null) {
-        const patientList = document.getElementById("patientList");
-
         for (let i = 0; i < patientSaved.length; i++) {
-            const patient = patientSaved[i];
-
-            const patientInfo = document.createElement("p");
-            patientInfo.textContent = `Prénom : ${patient.firstName}, Nom : ${patient.lastName}, Date de naissance : ${patient.birthDay}`;
-
-            const modifyLink  = document.createElement("a");
-            modifyLink .textContent = "Modifiez";
-
-            modifyLink.href = `modif_patient.html?numSecu=${patient.secuNumber}`;                      
-
-            patientList.appendChild(patientInfo);
-            patientList.appendChild(modifyLink)
+            addPatientToList(patientSaved[i]);
         }
     }
 
     console.log("Tout est chargé !");
 };
+
