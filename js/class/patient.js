@@ -9,3 +9,4 @@ class Patient {
         this.appointement =[];
     }
 };
+

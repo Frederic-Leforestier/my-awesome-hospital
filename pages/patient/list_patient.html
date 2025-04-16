@@ -21,11 +21,11 @@
     <h2>Formulaire Patients</h2>
     
     <form id="formPatient">
-        <label for="firstName">First Name:</label>
+        <label for="firstName">Prénom:</label>
         <input type="text" id="firstName" name="firstName">
         <br>
         
-        <label for="lastName">Last Name:</label>
+        <label for="lastName">Nom:</label>
         <input type="text" id="lastName" name="lastName">
         <br>
         
@@ -33,7 +33,7 @@
         <input type="text" id="numSecu" name="numSecu">
         <br>
         
-        <label for="birthdate">Birthdate:</label>
+        <label for="birthdate">date de naissance:</label>
         <input type="date" id="birthdate" name="birthdate">
         <br>
         
@@ -45,7 +45,7 @@
         <input type="text" id="tel" name="tel">
         <br>
         
-        <input type="submit" value="Submit" id="btnSubmit">
+        <input type="submit" value="Envoyer" id="btnSubmit">
     </form>
 
     <p id="error-message" style="color: red;"></p>
@@ -53,7 +53,12 @@
 
     <h2>Liste des Patients</h2>
     
+    <div id="patientList"></div>
+
+
     <script src="/js/class/patient.js"></script>
+    <script src="/js/form_patient.js"></script>
+
 
 
 </body>
