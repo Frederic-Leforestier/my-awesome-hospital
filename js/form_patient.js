@@ -16,10 +16,10 @@ document.getElementById("formPatient").addEventListener('submit', function(event
         
         if ( listpatients == null) {
             listpatients = [];
-            console.log(listpatients);
         }
         
         let existeDeja = false;
+
         for (let i = 0; i < listpatients.length; i++) {
             if  (listpatients[i].secuNumber === newPatient.secuNumber) {
                 existeDeja = true;
@@ -31,14 +31,11 @@ document.getElementById("formPatient").addEventListener('submit', function(event
             return;
         }
 
-
-
         listpatients.push(newPatient);
         
         localStorage.setItem("patients", JSON.stringify(listpatients));
         
-        
-        
+              
         addPatientToList(newPatient);  // Ajouter à la liste des patients
         alert("Le patient a été ajouté avec succès !");
         document.getElementById("formPatient").reset(); // Réinitialise le formulaire
@@ -63,11 +60,34 @@ function addPatientToList(patient) {
     modifyLink.textContent = "Modifiez";
     modifyLink.href = `modif_patient.html?numSecu=${patient.secuNumber}`;
 
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Supprimez";
+
+    deleteBtn.addEventListener('click', function(){
+        if (confirm("En es tu certains?")){
+            let listpatients = JSON.parse(localStorage.getItem("patients"));
+            let newLis = [];
+
+            for (let i = 0; i < listpatients.length; i++) {
+                if (listpatients[i].secuNumber !== patient.secuNumber) {
+                    newLis.push(listpatients[i]);
+                }                
+            }
+
+            listpatients = newLis;
+            localStorage.setItem("patients", JSON.stringify(listpatients));
+
+            listSection.remove();
+            alert("patient supprimé")
+        }
+    })
+
     // Ajout des paragraphes au div principal
     listSection.appendChild(nameP);
     listSection.appendChild(firstNameP);
     listSection.appendChild(birthDayP);
     listSection.appendChild(modifyLink);
+    listSection.appendChild(deleteBtn);
     
     // Ajouter la nouvelle section à la liste des patients
     document.getElementById("patientList").appendChild(listSection);
