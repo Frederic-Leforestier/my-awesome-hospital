@@ -96,11 +96,12 @@ function validatePatientForm() {
     
     let errorMessage = ""; // Variable pour stocker les erreurs
     
-    if (firstName === "") {
+    let regexFirstName = /^[A-Za-zÀ-ÖØ-öø-ÿ]+([ '-][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/;
+    if (firstName === "" || !regexFirstName.test(firstName)) {
         errorMessage += "Le prénom est obligatoire.\n";
     }
     
-    let regexLastName = /^[A-Z]+([- ][A-Z]+)*$/;
+    let regexLastName = /^[A-ZÀ-ÖØ-Ý]+([ -][A-ZÀ-ÖØ-Ý]+)*$/;
     if (lastName === "" || !regexLastName.test(lastName)) {
         errorMessage += "Le nom est obligatoire et doit être en MAJUSCULE.\n";
     }
