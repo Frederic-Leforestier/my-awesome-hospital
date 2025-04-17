@@ -53,8 +53,8 @@ function addPatientToList(patient) {
     const firstNameP = document.createElement("p");
     firstNameP.appendChild(document.createTextNode("Prénom : " + patient.firstName));
     
-    const birthDayP = document.createElement("p");
-    birthDayP.appendChild(document.createTextNode("Date de naissance : " + patient.birthDay));
+    const birthDateP = document.createElement("p");
+    birthDateP.appendChild(document.createTextNode("Date de naissance : " + patient.birthDate));
     
     const modifyLink = document.createElement("a");
     modifyLink.textContent = "Modifiez";
@@ -82,12 +82,19 @@ function addPatientToList(patient) {
         }
     })
 
+    const ConsultLink = document.createElement("a");
+    ConsultLink.textContent = "Consultez";
+    ConsultLink.href = `consultation_patient.html?numSecu=${patient.secuNumber}`;
+
+    
+    
     // Ajout des paragraphes au div principal
     listSection.appendChild(nameP);
     listSection.appendChild(firstNameP);
-    listSection.appendChild(birthDayP);
+    listSection.appendChild(birthDateP);
     listSection.appendChild(modifyLink);
     listSection.appendChild(deleteBtn);
+    listSection.appendChild(ConsultLink);
     
     // Ajouter la nouvelle section à la liste des patients
     document.getElementById("patientList").appendChild(listSection);
