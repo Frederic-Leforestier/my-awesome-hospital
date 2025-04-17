@@ -5,9 +5,9 @@ function addLocalStorage(tab,objet,nameKey) {
     }
     
 
-document.getElementById('resetStorage').addEventListener('click', function(){
+/* document.getElementById('resetStorage').addEventListener('click', function(){
     localStorage.clear()
-});
+}); */
 
 function readJson(nameKey) {
     const contenue= localStorage.getItem(nameKey);
@@ -34,4 +34,23 @@ function suppLocalStorageDoc(key, id) {
     let contenue = JSON.parse(localStorage.getItem(key));
     contenue = contenue.filter((key) => key.rpps != id);
     localStorage.setItem(key, JSON.stringify(contenue));
+}
+
+// Recuperation du rpps et creation de l'html lors de l'ouverture de la consultation.
+
+function loadConsulationDoctor () {
+    let doctor = recreateClassDoctor();
+    console.log(doctor.birthDate);
+    createDetailDoctorHtml(doctor);
+}
+
+function recreateClassDoctor() {
+    let recupRpps = new URLSearchParams(window.location.search);
+    let rpps = recupRpps.get("rpps");
+    console.log(rpps);
+    let doctorTab = JSON.parse(localStorage.getItem('doctors'));
+    doctorTab = doctorTab.find((index) => index.rpps === rpps);
+    console.log(doctorTab)
+    let doctor = new Doctors(doctorTab.firstName, doctorTab.lastName, doctorTab.rpps, new Date(doctorTab.birthDate), doctorTab.speciality);
+    return doctor
 }
