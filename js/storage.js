@@ -32,14 +32,4 @@ function suppLocalStorageDoc(key, id) {
     localStorage.setItem(key, JSON.stringify(contenue));
 }
 
-function loadConsulationPatient () {
-    let recupNumSecu = new URLSearchParams(window.location.search);
-    let NumSecurite = recupNumSecu.get("numSecu");
-    console.log(NumSecurite);
-    let patientTab = JSON.parse(localStorage.getItem('patients'));
-    patientTab = patientTab.find((index) => index.secuNumber === NumSecurite);
-    console.log(patientTab)
-    let patien = new Patient(patientTab.firstName, patientTab.lastName, new Date(patientTab.birthDate), patientTab.secuNumber,
-    patientTab.mail, patientTab.phone);
-    createDetailPatientHtml(patien);
-}
+
