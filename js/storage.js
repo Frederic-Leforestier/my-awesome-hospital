@@ -15,7 +15,7 @@ function suppLocalStorageDoc(key, id) {
     localStorage.setItem(key, JSON.stringify(contenue));
 }
 
-//Suppresion PAtien
+//Suppresion PAtient
 function suppLocalStorageDoc(key, id) {
     let contenue = JSON.parse(localStorage.getItem(key));
     contenue = contenue.filter((key) => key.rpps != id);
