@@ -3,7 +3,7 @@ class Doctors {
         this.firstName = first;
         this.lastName = last;
         this.rpps = id;
-        this.birthDay = birth;
+        this.birthDate = birth;
         this.appointement = [];
         this.speciality = speciality;
     }
