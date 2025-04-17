@@ -1,6 +1,5 @@
 document.getElementById("formPatient").addEventListener('submit', function(event) {
     event.preventDefault(); // Empêche la soumission du formulaire pour éviter le rechargement de la page
-    // window.unload
     
     if (validatePatientForm()) {
         // Création d'un nouveau patient avec les données du formulaire
@@ -17,10 +16,10 @@ document.getElementById("formPatient").addEventListener('submit', function(event
         
         if ( listpatients == null) {
             listpatients = [];
-            console.log(listpatients);
         }
         
         let existeDeja = false;
+
         for (let i = 0; i < listpatients.length; i++) {
             if  (listpatients[i].secuNumber === newPatient.secuNumber) {
                 existeDeja = true;
@@ -32,14 +31,11 @@ document.getElementById("formPatient").addEventListener('submit', function(event
             return;
         }
 
-
-
         listpatients.push(newPatient);
         
         localStorage.setItem("patients", JSON.stringify(listpatients));
         
-        
-        
+              
         addPatientToList(newPatient);  // Ajouter à la liste des patients
         alert("Le patient a été ajouté avec succès !");
         document.getElementById("formPatient").reset(); // Réinitialise le formulaire
@@ -57,30 +53,48 @@ function addPatientToList(patient) {
     const firstNameP = document.createElement("p");
     firstNameP.appendChild(document.createTextNode("Prénom : " + patient.firstName));
     
-    const birthDayP = document.createElement("p");
-    birthDayP.appendChild(document.createTextNode("Date de naissance : " + patient.birthDay));
-    
-    const secuNumberP = document.createElement("p");
-    secuNumberP.appendChild(document.createTextNode("Numéro de sécu : " + patient.secuNumber));
-    
-    const mailP = document.createElement("p");
-    mailP.appendChild(document.createTextNode("Email : " + patient.mail));
-    
-    const phoneP = document.createElement("p");
-    phoneP.appendChild(document.createTextNode("Téléphone : " + patient.phone));
+    const birthDateP = document.createElement("p");
+    birthDateP.appendChild(document.createTextNode("Date de naissance : " + patient.birthDate));
     
     const modifyLink = document.createElement("a");
     modifyLink.textContent = "Modifiez";
     modifyLink.href = `modif_patient.html?numSecu=${patient.secuNumber}`;
 
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Supprimez";
+
+    deleteBtn.addEventListener('click', function(){
+        if (confirm("En es tu certains?")){
+            let listpatients = JSON.parse(localStorage.getItem("patients"));
+            let newLis = [];
+
+            for (let i = 0; i < listpatients.length; i++) {
+                if (listpatients[i].secuNumber !== patient.secuNumber) {
+                    newLis.push(listpatients[i]);
+                }                
+            }
+
+            listpatients = newLis;
+            localStorage.setItem("patients", JSON.stringify(listpatients));
+
+            listSection.remove();
+            alert("patient supprimé")
+        }
+    })
+
+    const ConsultLink = document.createElement("a");
+    ConsultLink.textContent = "Consultez";
+    ConsultLink.href = `consultation_patient.html?numSecu=${patient.secuNumber}`;
+
+    
+    
     // Ajout des paragraphes au div principal
     listSection.appendChild(nameP);
     listSection.appendChild(firstNameP);
-    listSection.appendChild(birthDayP);
-    listSection.appendChild(secuNumberP);
-    listSection.appendChild(mailP);
-    listSection.appendChild(phoneP);
+    listSection.appendChild(birthDateP);
     listSection.appendChild(modifyLink);
+    listSection.appendChild(deleteBtn);
+    listSection.appendChild(ConsultLink);
     
     // Ajouter la nouvelle section à la liste des patients
     document.getElementById("patientList").appendChild(listSection);
@@ -96,11 +110,12 @@ function validatePatientForm() {
     
     let errorMessage = ""; // Variable pour stocker les erreurs
     
-    if (firstName === "") {
+    let regexFirstName = /^[A-Za-zÀ-ÖØ-öø-ÿ]+([ '-][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/;
+    if (firstName === "" || !regexFirstName.test(firstName)) {
         errorMessage += "Le prénom est obligatoire.\n";
     }
     
-    let regexLastName = /^[A-Z]+([- ][A-Z]+)*$/;
+    let regexLastName = /^[A-ZÀ-ÖØ-Ý]+([ -][A-ZÀ-ÖØ-Ý]+)*$/;
     if (lastName === "" || !regexLastName.test(lastName)) {
         errorMessage += "Le nom est obligatoire et doit être en MAJUSCULE.\n";
     }
@@ -144,23 +159,11 @@ window.onload = function () {
     let patientSaved = JSON.parse(localStorage.getItem("patients"));
 
     if (patientSaved !== null) {
-        const patientList = document.getElementById("patientList");
-
         for (let i = 0; i < patientSaved.length; i++) {
-            const patient = patientSaved[i];
-
-            const patientInfo = document.createElement("p");
-            patientInfo.textContent = `Prénom : ${patient.firstName}, Nom : ${patient.lastName}, Date de naissance : ${patient.birthDay}`;
-
-            const modifyLink  = document.createElement("a");
-            modifyLink .textContent = "Modifiez";
-
-            modifyLink.href = `modif_patient.html?numSecu=${patient.secuNumber}`;                      
-
-            patientList.appendChild(patientInfo);
-            patientList.appendChild(modifyLink)
+            addPatientToList(patientSaved[i]);
         }
     }
 
-    console.log("Tout est chargé !");
+    // console.log("Tout est chargé !");
 };
+

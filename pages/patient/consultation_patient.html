@@ -15,8 +15,44 @@
             <a href="/pages/patient/list_patient.html">Patients</a> 
         </nav>
     </header>
+    
+    <main id="patientDetails">
+        
+    </main>
+    
+    <section id="appointementPatient">
+        <form id="formApp">
+            <label for="date">Date :</label><br>
+            <input type="date" id="date"><br>
+            
+            <label for="time">Heure :</label><br>
+            <input type="time" id="time"><br>
+            
+            <label for="doctorList">Médecin :</label><br>
+            <select name="doctorList" id="doctorList">
+                <option value="">--Choisissez le médecin--</option>
+                <option value="Docteur House">Docteur House</option>
+            </select><br>
+            
+            <label for="raeson">Raison :</label><br>
+            <input  type="text" id="raeson"><br>
+            
+            <input type="submit" value="Envoyer">
+        </form>
+        <p id="error-message"></p>
+    </section>
 
+    <div id = "listRdv">
 
-
+    </div>
+    
+    
+    <script src="../../js/class/Appointement.js"></script>
+    <script src="../../js/class/departement.js"></script>
+    <script src="../../js/class/patient.js"></script>
+    <script src="../../js/class/doctor.js"></script>
+    <script src="../../js/storage.js"></script>
+    <script src="/js/detailPatient.js"></script>
+    
 </body>
 </html>
