@@ -39,6 +39,12 @@ function suppLocalStorageDoc(key, id) {
 // Recuperation du rpps et creation de l'html lors de l'ouverture de la consultation.
 
 function loadConsulationDoctor () {
+    let doctor = recreateClassDoctor();
+    console.log(doctor.birthDate);
+    createDetailDoctorHtml(doctor);
+}
+
+function recreateClassDoctor() {
     let recupRpps = new URLSearchParams(window.location.search);
     let rpps = recupRpps.get("rpps");
     console.log(rpps);
@@ -46,6 +52,5 @@ function loadConsulationDoctor () {
     doctorTab = doctorTab.find((index) => index.rpps === rpps);
     console.log(doctorTab)
     let doctor = new Doctors(doctorTab.firstName, doctorTab.lastName, doctorTab.rpps, new Date(doctorTab.birthDate), doctorTab.speciality);
-    console.log(doctor.birthDate);
-    createDetailDoctorHtml(doctor);
+    return doctor
 }

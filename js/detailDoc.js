@@ -24,8 +24,68 @@ function createDetailDoctorHtml(doctor) {/*
     main.appendChild(newdiv);
 }
 
+function validateFormAppoitement() {
+    let date = document.forms["formApp"]["date"].value;
+    let time = document.forms["formApp"]["time"].value;
+    const finalDate = new Date(`${date}T${time}`);
+    let patientList = document.forms["formApp"]["patientList"];
+    let raeson = document.forms["formApp"]["raeson"].value;
+    let errorMessage = "";
+    let today = new Date();
+            
+    if (isNaN(finalDate.getTime())) {
+        errorMessage += "Aucune date selectionée\n"; 
+    } else if (finalDate < today) {
+        errorMessage += "Bonjour DoBROWN\n";
+    }
+
+    if ( patientList.options[patientList.selectedIndex].text == "--Choissisez le patient--") {
+        errorMessage += "Veuillez choisir un patient \n"
+    }
+
+    if ( raeson == "") {
+        errorMessage += "Veuillez renseigner une raison pour le rendez vous\n"; 
+    }
+
+    // Affichage message erreur
+    if (errorMessage !== "") {
+        document.getElementById('error-message').style.color = "red";
+        document.getElementById('error-message').innerText = errorMessage;
+        return false; // Sert pour stopper le submit du formulaire a cause de l'erreur
+    }
+    return true
+}
+
+// Ajout de la verification du numero Rpps Avant le push
+function checkRpps(tab, doctor) {
+    
+    for (let i= 0; i < tab.length; i++) {
+        if (tab[i].rpps == doctor.rpps) {
+            return false
+        }
+    }
+    return true
+}
+
+
+
+
 document.getElementById("formApp").addEventListener('submit', function(event) {
     event.preventDefault();
-let time = document.getElementById('time');
-console.log(time.value);
+
+    let appointement = JSON.parse(localStorage.getItem('appointement'));
+    if (appointement == null) {
+        appointement = []
+    }
+    
+
+    console.log(appointement)
+console.log(new Date(`${this.date.value}T${this.time.value}`))
+console.log(this.patientList.options[this.patientList.selectedIndex].text)
+    if(validateFormAppoitement()) {
+        let doctor = recreateClassDoctor();
+        console.log(doctor);
+        let newApp = new Appointement(new Date(`${this.date.value}T${this.time.value}`), doctor.rpps,this.patientList.value, this.raeson.value)
+        console.log(newApp);
+    }
 })

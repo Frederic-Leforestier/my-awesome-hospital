@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/style/output.css">
     <title>My awesome Hospital</title>
-    <link rel="stylesheet" href="/index.html">
+    <link rel="stylesheet" href="../../assets/style/output.css">
 </head>
 <body>
     <header>
@@ -26,18 +26,19 @@
             
             <label for="time">Heure :</label><br>
             <input type="time" id="time"><br>
-
-            <label for="doctor">Doctor :</label><br>
-            <input type="text" id="doctor"><br>
             
-            <label for="patient">Patient :</label><br>
-            <input type="text" id="patient"><br>
+            <label for="patientList">Patient :</label><br>
+            <select name="patientList" id="patientList">
+                <option value="">--Choissisez le patient--</option>
+                <option value="Dupont Jean">Dupont Jean</option>
+              </select><br>
             
             <label for="raeson">Raison :</label><br>
-            <input  id="raeson"><br>
+            <input  type="text" id="raeson"><br>
           
             <input type="submit" value="Envoyer">
           </form>
+          <p id="error-message"></p>
     </section>
 
     <script src="../../js/class/Appointement.js"></script>

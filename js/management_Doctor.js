@@ -11,7 +11,7 @@ document.getElementById("formDoctor").addEventListener('submit', function(event)
         // Effacement des erreurs
         document.getElementById('error-message').innerHTML = "";
         // creation ephemere de l'objet
-        let doctor = new Doctors(this.firstName.value.charAt(0).toUpperCase() + firstName.value.slice(1), this.lastName.value.toUpperCase(), this.RPPS.value, new Date(this.birthDate.value).toLocaleDateString("fr-FR"), this.speciality.value);
+        let doctor = new Doctors(this.firstName.value.charAt(0).toUpperCase() + firstName.value.slice(1).toLowerCase(), this.lastName.value.toUpperCase(), this.RPPS.value, new Date(this.birthDate.value), this.speciality.value);
         this.reset();
         // Envoi du tout en LocalStorage
         if (!checkRpps(doctors, doctor)) {
