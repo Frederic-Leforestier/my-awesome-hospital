@@ -1,5 +1,37 @@
 window.onload = loadConsulationDoctor();
 
+// Recuperation du rpps et creation de l'html lors de l'ouverture de la consultation.
+
+function loadConsulationDoctor () {
+    let doctor = recreateClassDoctor();
+    createDetailDoctorHtml(doctor);
+    readJson('appointements')
+}
+
+function recreateClassDoctor() {
+    let rpps = recupRpps();
+    let doctorTab = JSON.parse(localStorage.getItem('doctors'));
+    doctorTab = doctorTab.find((index) => index.rpps === rpps);
+    let doctor = new Doctors(doctorTab.firstName, doctorTab.lastName, doctorTab.rpps, new Date(doctorTab.birthDate), doctorTab.speciality);
+    return doctor
+}
+function recupRpps() {
+    let recupRpps = new URLSearchParams(window.location.search);
+    let rpps = recupRpps.get("rpps");
+    return rpps
+}
+
+function readJson(nameKey) {
+    const contenue= localStorage.getItem(nameKey);
+    console.log(contenue);
+        if (contenue) {
+            let contenueNoJson = JSON.parse(contenue);
+            for (let i=0; i < contenueNoJson.length; i++) {
+                addAppToTable(contenueNoJson[i]);
+            }
+        }
+}
+
 function createDetailDoctorHtml(doctor) {/* 
     let dateFr = new Date(doctor.date).toLocaleDateString("fr-FR");
     console.log(dateFr) */
@@ -57,35 +89,54 @@ function validateFormAppoitement() {
 }
 
 // Ajout de la verification du numero Rpps Avant le push
-function checkRpps(tab, doctor) {
+function checkDate(tab, patient) {
     
     for (let i= 0; i < tab.length; i++) {
-        if (tab[i].rpps == doctor.rpps) {
+        if (tab[i].rpps == patient.rpps) {
             return false
         }
     }
     return true
 }
 
+function sameAppoitement() {
+    let sameApp = document.getElementById('sameApp');
+    sameApp.style.color = 'red';
+    sameApp.textContent = `L'heure du rendez vous existe deja présente`;
+}
 
-
+function addAppToTable(app) {
+    let table = document.getElementById('appTable');
+    let row = document.createElement('tr');
+    // Format date + heure FR
+    let dateStr = app.date.toLocaleDateString('fr-FR');
+    let timeStr = `${String(app.date.getHours()).padStart(2, '0')}h${String(app.date.getMinutes()).padStart(2, '0')}`;
+    row.innerHTML = 
+      `<td>${dateStr} ${timeStr}</td>
+      <td>${app.patient}</td>
+      <td>${app.reason}</td>`
+    ;
+    table.appendChild(row);
+  }
 
 document.getElementById("formApp").addEventListener('submit', function(event) {
     event.preventDefault();
 
-    let appointement = JSON.parse(localStorage.getItem('appointement'));
+    let appointement = JSON.parse(localStorage.getItem('appointements'));
     if (appointement == null) {
         appointement = []
     }
-    
 
-    console.log(appointement)
-console.log(new Date(`${this.date.value}T${this.time.value}`))
-console.log(this.patientList.options[this.patientList.selectedIndex].text)
     if(validateFormAppoitement()) {
-        let doctor = recreateClassDoctor();
-        console.log(doctor);
-        let newApp = new Appointement(new Date(`${this.date.value}T${this.time.value}`), doctor.rpps,this.patientList.value, this.raeson.value)
-        console.log(newApp);
+        let rpps = recupRpps();
+        let newApp = new Appointement(new Date(`${this.date.value}T${this.time.value}`), rpps,this.patientList.value, this.raeson.value);
+        this.reset();
+        if (!checkDate(appointement, newApp)) {
+            sameAppoitement();
+            return
+        } else {
+            addLocalStorage(appointement,newApp, "appointements");
+        }
+        addAppToTable(newApp);
     }
 })
