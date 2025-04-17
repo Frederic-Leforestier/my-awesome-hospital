@@ -181,3 +181,14 @@ for (let i=0; i<supp.length; i++){
         listDoctor.removeChild(divDoc);
     })
 }
+
+function readJson(nameKey) {
+    const contenue= localStorage.getItem(nameKey);
+        if (contenue) {
+            let contenueNoJson = JSON.parse(contenue);
+            for (let i=0; i < contenueNoJson.length; i++) {
+                createDoctorHtml(contenueNoJson[i]);
+            }
+        }
+}
+

@@ -13,7 +13,7 @@
         <nav>
             <a href="#">Departements</a>
             <a href="list_doctor.html">Doctors</a>
-            <a href="#">Patients</a>
+            <a href="../patient/list_patient.html">Patients</a>
         </nav>
     </header>
     <main id="doctorDetails">
@@ -30,7 +30,6 @@
             <label for="patientList">Patient :</label><br>
             <select name="patientList" id="patientList">
                 <option value="">--Choissisez le patient--</option>
-                <option value="Dupont Jean">Dupont Jean</option>
               </select><br>
             
             <label for="raeson">Raison :</label><br>
@@ -39,6 +38,22 @@
             <input type="submit" value="Envoyer">
           </form>
           <p id="error-message"></p>
+    </section>
+    <div id="sameApp"></div>
+
+    <section>
+        <table border="1">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Patient</th>
+                <th>Raison</th>
+              </tr>
+            </thead>
+            <tbody id="appTable">
+              <!-- Les rendez-vous apparaîtront ici -->
+            </tbody>
+          </table>
     </section>
 
     <script src="../../js/class/Appointement.js"></script>
