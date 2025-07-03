@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/style/output.css">
+    <title>Modification du Medecin</title>
+ 
+</head>
+<body>
+    <header>
+        <img src="/assets/img/logo.png" alt="logo Hospital" width="200">
+        <nav>
+            <a href="../departement/list_departement.html">Departements</a>
+            <a href="list_doctor.html">Doctors</a>
+            <a href="../patient/list_patient.html">Patients</a>
+        </nav>
+    </header>
+    <main>
+        <form id="formDoctor">
+            <label for="lastName">Nom :</label>
+            <br>
+            <input type="text" id="lastName">
+            <br>
+            <label for="firstName">Prénom :</label>
+            <br>
+            <input type="text" id="firstName">
+            <br>
+            <label for="birthDate">Date de naissance :</label>
+            <br>
+            <input type="date" id="birthDate">
+            <br>
+            <label for="RPPS">RPPS :</label>
+            <br>
+            <input type="text" id="RPPS" placeholder="11 chiffres requis">
+            <br>
+            <label for="speciality">Specialité :</label>
+            <br>
+            <input type="text" id="speciality"></input>
+            <br>
+            <input type="submit" value="Envoyer">
+        </form>
+        <p id="error-message"></p>
+        <p id="validation"></p>
+    </main>
+
+    <script src="../../js/class/Appointement.js"></script>
+    <script src="../../js/class/departement.js"></script>
+    <script src="../../js/class/patient.js"></script>
+    <script src="../../js/class/doctor.js"></script>
+    <script src="../../js/storage.js"></script>
+    <script src="../../js/doctorjs/ModificationDoc.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/style/output.css">
+    <title>My awesome Hospital</title>
+    <link rel="stylesheet" href="../../assets/style/output.css">
+</head>
+<body>
+    <header>
+        <img src="/assets/img/logo.png" alt="logo Hospital">
+        <nav>
+            <a href="#">Departements</a>
+            <a href="list_doctor.html">Doctors</a>
+            <a href="../patient/list_patient.html">Patients</a>
+        </nav>
+    </header>
+    <main id="doctorDetails">
+
+    </main>
+    <section id="appointementDoctor">
+        <form id="formApp">
+            <label for="date">Date :</label><br>
+            <input type="date" id="date"><br>
+            
+            <label for="time">Heure :</label><br>
+            <input type="time" id="time"><br>
+            
+            <label for="patientList">Patient :</label><br>
+            <select name="patientList" id="patientList">
+                <option value="">--Choissisez le patient--</option>
+              </select><br>
+            
+            <label for="raeson">Raison :</label><br>
+            <input  type="text" id="raeson"><br>
+          
+            <input type="submit" value="Envoyer">
+          </form>
+          <p id="error-message"></p>
+    </section>
+    <div id="sameApp"></div>
+
+    <section>
+        <table border="1">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Patient</th>
+                <th>Raison</th>
+              </tr>
+            </thead>
+            <tbody id="appTable">
+              <!-- Les rendez-vous apparaîtront ici -->
+            </tbody>
+          </table>
+    </section>
+
+    <script src="../../js/class/Appointement.js"></script>
+    <script src="../../js/class/departement.js"></script>
+    <script src="../../js/class/patient.js"></script>
+    <script src="../../js/class/doctor.js"></script>
+    <script src="../../js/storage.js"></script>
+    <script src="../../js/doctorjs/ConsulationAndAppoitementDoc.js"></script>
+</body>
+</html>

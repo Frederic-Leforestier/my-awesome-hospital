@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/style/output.css">
+    <title>Listes des départements</title>
+    
+</head>
+<body>
+    <header>
+        <img src="/my-awesome-hospital/assets/img/logo.png"style="width: 100px; height: 100px;" alt="logo Hospital">
+        <nav>
+            <a href="#">Departements</a>
+            <a href="#">Doctors</a>
+            <a href="#">Patients</a>
+        </nav>
+    </header>
+    <main>
+        <img src="/my-awesome-hospital/assets/img/istockphoto-510351863-2048x2048.jpg" style="width: 100px; height: 100px;" alt="Image de l'hopital">
+        <form  id="formulaire">
+            <label for="id">ID :</label><br>
+            <input type="text" id="id_departement"  ><br><br>
+            
+            <label for="Nom">Nom :</label><br>
+            <input type="text" id="nom_departement" ><br><br>
+            
+            <input type="submit" value="Envoyer">
+            
+        </form>
+        <p id="error"style="color: red;" ></p>
+        
+    </main>
+    <section id="section_dom" >
+        <div id="résultat-valide"></div>
+        <div id="ERROR" style="color: red;"></div>
+    </section>
+    <script src="/my-awesome-hospital/js/management.js"></script>
+    <script src="/my-awesome-hospital/js/class/departement.js"></script>
+    
+</body>
+</html>
